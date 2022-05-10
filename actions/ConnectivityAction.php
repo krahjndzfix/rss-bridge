@@ -25,7 +25,7 @@ class ConnectivityAction extends ActionAbstract {
 	public function execute() {
 
 		if(!Debug::isEnabled()) {
-			returnError('This action is only available in debug mode!');
+			returnError('This action is only available in debug mode!', 400);
 		}
 
 		if(!isset($this->userData['bridge'])) {
@@ -55,7 +55,6 @@ class ConnectivityAction extends ActionAbstract {
 	private function reportBridgeConnectivity($bridgeName) {
 
 		$bridgeFac = new \BridgeFactory();
-		$bridgeFac->setWorkingDir(PATH_LIB_BRIDGES);
 
 		if(!$bridgeFac->isWhitelisted($bridgeName)) {
 			header('Content-Type: text/html');
