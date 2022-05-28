@@ -36,6 +36,7 @@ const RSSBRIDGE_HTTP_STATUS_CODES = [
 	'415' => 'Unsupported Media Type',
 	'416' => 'Requested Range Not Satisfiable',
 	'417' => 'Expectation Failed',
+	'429' => 'Too Many Requests',
 	'500' => 'Internal Server Error',
 	'501' => 'Not Implemented',
 	'502' => 'Bad Gateway',
@@ -49,7 +50,14 @@ const RSSBRIDGE_HTTP_STATUS_CODES = [
  *
  * @param array $httpHeaders E.g. ['Content-type: text/plain']
  * @param array $curlOptions Associative array e.g. [CURLOPT_MAXREDIRS => 3]
- * @param bool $returnFull Whether to return an array ['header' => [...], 'content' => '...']
+ * @param bool $returnFull Whether to return an array:
+ *                         [
+ *                              'code' => int,
+ *                              'header' => array,
+ *                              'content' => string,
+ *                              'status_lines' => array,
+ *                         ]
+
  * @return string|array
  */
 function getContents(
